@@ -19,6 +19,10 @@ allprojects {
     repositories {
         google()
         jcenter()
+
+        maven {
+            url 'file:///Users/mamingzhang/.m2/repository/'
+        }
     }
 }
 
