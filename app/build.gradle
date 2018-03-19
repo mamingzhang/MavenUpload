@@ -27,3 +27,37 @@ dependencies {
 
     implementation 'com.mmz.demo:localrepo:1.0.0'
 }
+
+class ApkDistExtension {
+    Closure nameMap = null
+    String destDir = null
+}
+
+class ApkDistPlugin implements Plugin<Project> {
+
+    @Override
+    void apply(Project target) {
+        target.extensions.create("apkdistconf", ApkDistExtension)
+
+        target.task('apkdist') << {
+            println 'hello, world'
+
+            def closure = target['apkdistconf'].nameMap
+            closure('mmz')
+
+            println target['apkdistconf'].destDir
+        }
+    }
+}
+
+apply plugin: ApkDistPlugin
+
+apkdistconf {
+    nameMap {
+        name ->
+            println 'hello, ' + name
+            return name
+    }
+
+    destDir 'mmz dir'
+}
