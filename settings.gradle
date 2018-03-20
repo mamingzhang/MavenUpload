@@ -1,1 +1,1 @@
-include ':app', ':localrepo'
+include ':app', ':localrepo', ':plugin'

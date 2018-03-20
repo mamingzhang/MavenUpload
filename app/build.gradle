@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.mmz.apkdist'
 
 android {
     compileSdkVersion 26
@@ -28,29 +29,29 @@ dependencies {
     implementation 'com.mmz.demo:localrepo:1.0.0'
 }
 
-class ApkDistExtension {
-    Closure nameMap = null
-    String destDir = null
-}
-
-class ApkDistPlugin implements Plugin<Project> {
-
-    @Override
-    void apply(Project target) {
-        target.extensions.create("apkdistconf", ApkDistExtension)
-
-        target.task('apkdist') << {
-            println 'hello, world'
-
-            def closure = target['apkdistconf'].nameMap
-            closure('mmz')
-
-            println target['apkdistconf'].destDir
-        }
-    }
-}
-
-apply plugin: ApkDistPlugin
+//class ApkDistExtension {
+//    Closure nameMap = null
+//    String destDir = null
+//}
+//
+//class ApkDistPlugin implements Plugin<Project> {
+//
+//    @Override
+//    void apply(Project target) {
+//        target.extensions.create("apkdistconf", ApkDistExtension)
+//
+//        target.task('apkdist') << {
+//            println 'hello, world'
+//
+//            def closure = target['apkdistconf'].nameMap
+//            closure('mmz')
+//
+//            println target['apkdistconf'].destDir
+//        }
+//    }
+//}
+//
+//apply plugin: ApkDistPlugin
 
 apkdistconf {
     nameMap {
@@ -59,5 +60,5 @@ apkdistconf {
             return name
     }
 
-    destDir 'mmz dir'
+    destDir 'mmz_plugin.apk'
 }
